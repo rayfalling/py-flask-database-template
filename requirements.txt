@@ -1,0 +1,5 @@
+sqlalchemy
+wtforms
+Flask
+Flask-SQLAlchemy
+xmltodict

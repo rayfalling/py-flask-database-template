@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% set active_page = "manager" %}
+{% block title %}
+    {% if page_title %}page_title
+    {% else %}查询
+    {% endif %}
+{% endblock %}
+
+{% block page_content %}
+    {% for category, values in list.items() %}
+        <div class="list-group">
+            <div class="list-group-item active">
+                <h4 class="list-group-item-content">
+                    {{ category }}
+                </h4>
+            </div>
+            {% for item in values %}
+                <div class="list-group-item">
+                    <a style="float: right" class="btn btn-danger"
+                       href="{{ url_for("manager_remove", category=category, name=item) }}">删除</a>
+                    <a style="float: right;margin-right: 8px" type="button" class="btn btn-info"
+                       data-toggle="modal" data-target="#update_name_{{ item }}">修改
+                    </a>
+                    <h4 class="list-group-item-content">
+                        {{ item }}
+                    </h4>
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+    <div class="list-group">
+        <div class="list-group-item active">
+            <h4 class="list-group-item-content">
+                <a class="btn btn-info" data-toggle="modal" data-target="#add_new">添加新的
+                </a>
+            </h4>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    {% for category, values in list.items() %}
+        {% for item in values %}
+            <div class="modal fade" id="update_name_{{ item }}" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <form role="form" method="post" action="{{ url_for("manager_update_name") }}">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">修改菜名</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <input value="{{ item }}" type="hidden" class="form-control" name="name">
+                                    <input value="{{ category }}" type="hidden" class="form-control" name="category">
+                                    <label>新名称
+                                        <input value="{{ item }}" type="text" class="form-control" name="name_new">
+                                    </label>
+                                    <label>新分类
+                                        <input value="{{ category }}" type="text" class="form-control" name="category_new">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                <button type="submit" class="btn btn-primary">确认</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+
+    <div class="modal fade" id="add_new" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <form role="form" method="post" action="{{ url_for("manager_add_item") }}">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">添加</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>名称
+                                <input value="" type="text" class="form-control" name="name">
+                            </label>
+                            <label>分类
+                                <input value="" type="text" class="form-control" name="category">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="submit" class="btn btn-primary">确认</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
