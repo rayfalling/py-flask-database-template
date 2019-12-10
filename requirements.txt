@@ -3,3 +3,5 @@ wtforms
 Flask
 Flask-SQLAlchemy
 xmltodict
+Flask-Bootstrap
+Flask-Wtf

@@ -1,4 +1,4 @@
-from application.model import *
+from application import db
 from application.utils.data_import import import_from_json
 from os import path
 

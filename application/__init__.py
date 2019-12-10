@@ -13,3 +13,5 @@ app.config.from_object('configuration')
 db = SQLAlchemy(app)
 
 from application import router
+
+__all__ = ["app", "db"]

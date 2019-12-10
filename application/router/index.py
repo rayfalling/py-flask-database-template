@@ -14,6 +14,7 @@ def root():
 @app.route("/index", methods=["GET", "POST"])
 def index():
     form = Category()
+    form.category.choices = meals_handler.query_category()
     if session.get("login") is True:
         if form.validate_on_submit():
             choice = form.category.data
@@ -21,3 +22,6 @@ def index():
             flash("{} 为您推荐: {}".format(choice, rec))
         return render_template("index.html", form=form)
     return redirect(url_for("login"))
+
+
+__all__ = ["root", "index"]

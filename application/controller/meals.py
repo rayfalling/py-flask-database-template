@@ -5,5 +5,5 @@ from application.handler import meals as meals_handler
 
 
 class Category(FlaskForm):
-    category = SelectField('餐点：', choices=meals_handler.query_category(), validators=[DataRequired()])
+    category = SelectField('餐点：', validators=[DataRequired()])
     submit = SubmitField('获取推荐')

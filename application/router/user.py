@@ -44,3 +44,6 @@ def logout():
     session["login"] = False
     session["username"] = ""
     return redirect(url_for("login"))
+
+
+__all__ = ["login", "logout", "register"]

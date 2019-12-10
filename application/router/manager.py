@@ -46,3 +46,6 @@ def manager_add_item():
                 flash("添加成功")
             return redirect(url_for("manager_list"))
     return redirect(url_for("login"))
+
+
+__all__ = ["manager_remove", "manager_update_name", "manager_add_item", "manager_list"]

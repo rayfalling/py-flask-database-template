@@ -17,8 +17,8 @@ def register_user(username, password):
             db.session.add(user)
             db.session.commit()
         except exc.SQLAlchemyError:
-            return True
-    return False
+            return False
+    return True
 
 
 def login(username, password):
